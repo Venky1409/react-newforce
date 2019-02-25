@@ -59,22 +59,37 @@ class Payroll extends Component {
 	{
 		"name": "Malaysia",
 		"value": "malaysia"
+	},
+	{
+		"name": "Netherlands",
+		"value": "netherlands"
+	},
+	{
+		"name": "Malta",
+		"value": "malta"
+	},
+	{
+		"name": "Poland",
+		"value": "poland"
 	}
 ],
       'selectedValue': '',
-      'norway' : {"gross_salary": "5670", "gross_onsite": "3470", "emp_ded": "1290.84", "net_salary": "2179.16", "empr_ded2": "496.21"},
-      'finland' : {"gross_salary": "8127", "gross_onsite": "4683", "emp_ded": "1648.42", "net_salary": "3034.58", "empr_ded2": "1147.34"},
-      'switzerland' : {"gross_salary": "9450", "gross_onsite": "4500", "emp_ded": "725", "net_salary": "3775", "empr_ded2": "1600"},
-      'denmark' : {"gross_salary": "9072", "gross_onsite": "4897.50", "emp_ded": "798", "net_salary": "4099.50", "empr_ded2": "1752.50"},
-      'chez_republic' : {"gross_salary": "3969", "gross_onsite": "1850.01", "emp_ded": "592.01", "net_salary": "1258", "empr_ded2": "629"},
-      'lativa' : {"gross_salary": "8032.5", "gross_onsite": "4583", "emp_ded": "1048.59", "net_salary": "3534.41", "empr_ded2": "1549.05"},
-      'sweden' : {"gross_salary": "7560", "gross_onsite": "4150", "emp_ded": "1377.80", "net_salary": "2772.20", "empr_ded2": "1305.18"},
-      'france' : {"gross_salary": "6237", "gross_onsite": "4583.33", "emp_ded": "1065.63", "net_salary": "3517.70", "empr_ded2": "1145.83"},
-      'belgium' : {"gross_salary": "9450", "gross_onsite": "3500", "emp_ded": "1345", "net_salary": "2154.25", "empr_ded2": "1136.45"},
-      'luxembourg' : {"gross_salary": "9450", "gross_onsite": "6174", "emp_ded": "2184", "net_salary": "3990", "empr_ded2": "1150.05"},
-      'germany' : {"gross_salary": "8100", "gross_onsite": "4450", "emp_ded": "1700", "net_salary": "2750", "empr_ded2": "860.05"},
-      'spain' : {"gross_salary": "7749", "gross_onsite": "4166", "emp_ded": "1354", "net_salary": "2812", "empr_ded2": "1425"},
-      'malaysia' : {"gross_salary": "30870", "gross_onsite": "7000", "emp_ded": "700", "net_salary": "6300", "empr_ded2": "840"},
+      'norway' : {"gross_onsite": "3470", "emp_ded": "1290.84", "net_salary": "2179.16", "empr_ded2": "496.21"},
+      'finland' : {"gross_onsite": "4683", "emp_ded": "1648.42", "net_salary": "3034.58", "empr_ded2": "1147.34"},
+      'switzerland' : {"gross_onsite": "4500", "emp_ded": "725", "net_salary": "3775", "empr_ded2": "1600"},
+      'denmark' : {"gross_onsite": "4897.50", "emp_ded": "798", "net_salary": "4099.50", "empr_ded2": "1752.50"},
+      'chez_republic' : {"gross_onsite": "1850.01", "emp_ded": "592.01", "net_salary": "1258", "empr_ded2": "629"},
+      'lativa' : {"gross_onsite": "4583", "emp_ded": "1048.59", "net_salary": "3534.41", "empr_ded2": "1549.05"},
+      'sweden' : {"gross_onsite": "4150", "emp_ded": "1377.80", "net_salary": "2772.20", "empr_ded2": "1305.18"},
+      'france' : {"gross_onsite": "4583.33", "emp_ded": "1065.63", "net_salary": "3517.70", "empr_ded2": "1145.83"},
+      'belgium' : {"gross_onsite": "3500", "emp_ded": "1345", "net_salary": "2154.25", "empr_ded2": "1136.45"},
+      'luxembourg' : {"gross_onsite": "6174", "emp_ded": "2184", "net_salary": "3990", "empr_ded2": "1150.05"},
+      'germany' : {"gross_onsite": "4450", "emp_ded": "1700", "net_salary": "2750", "empr_ded2": "860.05"},
+      'spain' : {"gross_onsite": "4166", "emp_ded": "1354", "net_salary": "2812", "empr_ded2": "1425"},
+      'malaysia' : {"gross_onsite": "7000", "emp_ded": "700", "net_salary": "6300", "empr_ded2": "840"},
+      'netherlands' : {"gross_onsite": "5775.63", "emp_ded": "1399.10", "net_salary": "4376.53", "empr_ded2": "524.35"},
+      'malta' : {"gross_onsite": "2350", "emp_ded": "528.30", "net_salary": "1821.70", "empr_ded2": "242.05"},
+      'poland' : {"gross_onsite": "2083.33", "emp_ded": "635.42", "net_salary": "1447.91", "empr_ded2": "914.35"},
       'formData': {}
     };
   }

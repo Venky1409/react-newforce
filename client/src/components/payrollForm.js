@@ -11,9 +11,11 @@ export default class PayrollForm extends Component {
         gross_onsite: "",
         emp_ded: "",
         net_salary: "",
+        empr_decp: "",
         empr_ded1: "",
         empr_ded2: "",
         empr_ded3: "",
+        empr_ded4: "",
         ctc: "",
         allowances: "",
         takehome: "",
@@ -29,37 +31,41 @@ export default class PayrollForm extends Component {
   }
 
   componentWillMount() {
-    this.setState({ gross_salary: this.props.formData.gross_salary });
     this.setState({ gross_onsite: this.props.formData.gross_onsite });
     this.setState({ emp_ded: this.props.formData.emp_ded });
     this.setState({ net_salary: this.props.formData.net_salary });
     this.setState({ empr_ded2: this.props.formData.empr_ded2 });
+    this.setState({ remmitance2: this.props.formData.gross_onsite });
+    this.setState({ remmitance3: this.props.formData.empr_ded2 });
+    this.setState({ ctc: Number(this.props.formData.gross_onsite) + Number(this.props.formData.empr_ded2) });
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ rate: '' });
+    this.setState({ days: '' });
     this.setState({ days_salary: '' });
     this.setState({ gross_margin: '' });
+    this.setState({ gross_salary: '' });
+    this.setState({ empr_decp: '' });
     this.setState({ empr_ded1: '' });
     this.setState({ empr_ded2: '' });
     this.setState({ empr_ded3: '' });
-    this.setState({ empr_ded3: '' });
-    this.setState({ ctc: '' });
+    this.setState({ empr_ded4: '' });
     this.setState({ allowances: '' });
     this.setState({ takehome: '' });
     this.setState({ remmitance1: '' });
-    this.setState({ remmitance2: '' });
-    this.setState({ remmitance3: '' });
     this.setState({ remmitance4: '' });
     this.setState({ expenses: '' });
     this.setState({ cost: '' });
     this.setState({ sales: '' });
     this.setState({ actual_margin: '' });
-    this.setState({ gross_salary: this.props.formData.gross_salary });
-    this.setState({ gross_onsite: this.props.formData.gross_onsite });
-    this.setState({ emp_ded: this.props.formData.emp_ded });
-    this.setState({ net_salary: this.props.formData.net_salary });
-    this.setState({ empr_ded2: this.props.formData.empr_ded2 });
+    this.setState({ gross_onsite: nextProps.formData.gross_onsite });
+    this.setState({ emp_ded: nextProps.formData.emp_ded });
+    this.setState({ net_salary: nextProps.formData.net_salary });
+    this.setState({ empr_ded2: nextProps.formData.empr_ded2 });
+    this.setState({ ctc: Number(nextProps.formData.gross_onsite) + Number(nextProps.formData.empr_ded2) });
+    this.setState({ remmitance2: nextProps.formData.gross_onsite });
+    this.setState({ remmitance3: nextProps.formData.empr_ded2 });
 }
 
   onSubmit(e) {
@@ -69,13 +75,37 @@ export default class PayrollForm extends Component {
 
   onChange(state, e) {
     this.setState({ [state]: e.target.value });
-    if (state === "rate") {
-      this.setState({ days_salary: 21*e.target.value });
+    if (state === "days" && this.state.rate) {
+      this.setState({ days_salary: e.target.value*this.state.rate });
+      this.setState({ sales: e.target.value*this.state.rate });
+      this.setState({ remmitance4:  e.target.value*40});
+    }
+    if (state === "gross_margin" && e.target.value && this.state.days_salary) {
+      let value = this.state.days_salary - this.state.days_salary/e.target.value;
+      this.setState({ gross_salary: value });
+    }
+    if (state === "gross_margin" && !e.target.value) {
+      this.setState({ gross_salary: '' });
+    }
+    if (state === "empr_decp" && this.state.days_salary) {
+      let value = this.state.days_salary*e.target.value/100;
+      this.setState({ empr_ded3: value });
+    }
+    if (state === "empr_ded4" && this.state.empr_ded3 && this.state.empr_ded2 && this.state.gross_salary) {
+      let value = this.state.empr_ded3 + Number(this.state.empr_ded2) + Number(e.target.value);
+      let allowances = this.state.gross_salary - this.props.formData.gross_onsite - value;
+      let takehome = Number(this.props.formData.net_salary) + allowances;
+      this.setState({ empr_ded1:  value });
+      this.setState({ allowances:  allowances });
+      this.setState({ takehome: takehome });
+      this.setState({ expenses: allowances });
+      this.setState({ remmitance1: Number(this.state.remmitance2) + Number(this.state.remmitance3) + Number(this.state.remmitance4) });
+      this.setState({ cost: Number(this.state.remmitance2) + Number(this.state.remmitance3) + Number(this.state.remmitance4) + allowances });
+      this.setState({ actual_margin: Number(this.state.sales) - (Number(this.state.remmitance2) + Number(this.state.remmitance3) + Number(this.state.remmitance4) + Number(allowances))});
     }
   };
 
   render() {
-    //const { rate, days_salary, gross_margin, gross_salary, gross_onsite, emp_ded, net_salary, empr_ded1, empr_ded2, empr_ded3, ctc, allowances, takehome, remmitance1, remmitance2, remmitance3, remmitance4, expenses, cost, sales, actual_margin} = this.state.data;
     return (
       <form className="form-horizontal" onSubmit={this.onSubmit}>
         <div className="form-group">
@@ -92,12 +122,23 @@ export default class PayrollForm extends Component {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-2" >For 21 Days:</label>
+          <label className="control-label col-sm-2" >For Days:</label>
+          <div className="col-sm-1">
+          <input
+          className="form-control"
+            type="text"
+            name="days"
+            value={this.state.days}
+            required="required"
+            onChange={this.onChange.bind(this, 'days')}
+          />
+          </div>
           <div className="col-sm-2">
           <input
           className="form-control"
             type="text"
             name="days_salary"
+            disabled
             value={this.state.days_salary}
             required="required"
             onChange={this.onChange.bind(this, 'days_salary')}
@@ -174,12 +215,26 @@ export default class PayrollForm extends Component {
           </div>
         </div>
         <div className="form-group">
+          <label className="control-label col-sm-2" >Employer Deduction %:</label>
+          <div className="col-sm-2">
+          <input
+          className="form-control"
+            type="text"
+            name="empr_decp"
+            required="required"
+            value={this.state.empr_decp}
+            onChange={this.onChange.bind(this, 'empr_decp')}
+          />
+          </div>
+        </div>
+        <div className="form-group">
           <label className="control-label col-sm-2" >Employer Deductions:</label>
           <div className="col-sm-2">
           <input
           className="form-control"
             type="text"
             name="empr_ded1"
+            disabled
             value={this.state.empr_ded1}
             required="required"
             onChange={this.onChange.bind(this, 'empr_ded1')}
@@ -202,8 +257,19 @@ export default class PayrollForm extends Component {
             type="text"
             name="empr_ded3"
             required="required"
+            disabled
             value={this.state.empr_ded3}
             onChange={this.onChange.bind(this, 'empr_ded3')}
+          />
+          </div>
+          <div className="col-sm-2">
+          <input
+          className="form-control"
+            type="text"
+            name="empr_ded4"
+            required="required"
+            value={this.state.empr_ded4}
+            onChange={this.onChange.bind(this, 'empr_ded4')}
           />
           </div>
         </div>
@@ -215,6 +281,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="ctc"
             required="required"
+            disabled
             value={this.state.ctc}
             onChange={this.onChange.bind(this, 'ctc')}
           />
@@ -228,6 +295,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="allowances"
             required="required"
+            disabled
             value={this.state.allowances}
             onChange={this.onChange.bind(this, 'allowances')}
           />
@@ -240,6 +308,7 @@ export default class PayrollForm extends Component {
           className="form-control"
             type="text"
             name="takehome"
+            disabled
             required="required"
             value={this.state.takehome}
             onChange={this.onChange.bind(this, 'takehome')}
@@ -254,6 +323,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="remmitance1"
             required="required"
+            disabled
             value={this.state.remmitance1}
             onChange={this.onChange.bind(this, 'remmitance1')}
           />
@@ -264,6 +334,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="remmitance2"
             required="required"
+            disabled
             value={this.state.remmitance2}
             onChange={this.onChange.bind(this, 'remmitance2')}
           />
@@ -274,6 +345,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="remmitance3"
             required="required"
+            disabled
             value={this.state.remmitance3}
             onChange={this.onChange.bind(this, 'remmitance3')}
           />
@@ -284,6 +356,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="remmitance4"
             required="required"
+            disabled
             value={this.state.remmitance4}
             onChange={this.onChange.bind(this, 'remmitance4')}
           />
@@ -297,6 +370,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="expenses"
             required="required"
+            disabled
             value={this.state.expenses}
             onChange={this.onChange.bind(this, 'expenses')}
           />
@@ -310,6 +384,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="cost"
             required="required"
+            disabled
             value={this.state.cost}
             onChange={this.onChange.bind(this, 'cost')}
           />
@@ -323,6 +398,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="sales"
             required="required"
+            disabled
             value={this.state.sales}
             onChange={this.onChange.bind(this, 'sales')}
           />
@@ -336,6 +412,7 @@ export default class PayrollForm extends Component {
             type="text"
             name="actual_margin"
             required="required"
+            disabled
             value={this.state.actual_margin}
             onChange={this.onChange.bind(this, 'actual_margin')}
           />

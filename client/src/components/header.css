@@ -32,6 +32,7 @@ img {
    color: #777;
    text-align: center;
    height: 35px;
+   z-index: 99;
 }
 .footer-text{
   margin-top: 5px;
