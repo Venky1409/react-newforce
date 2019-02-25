@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Sample React and Node application",
   "main": "server.js",
+  "engines": {
+    "npm": "6.4.1"
+  },
   "scripts": {
     "client-install": "cd client && npm install",
     "start": "node server.js",
