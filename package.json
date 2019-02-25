@@ -4,7 +4,8 @@
   "description": "Sample React and Node application",
   "main": "server.js",
   "engines": {
-    "npm": "6.4.1"
+    "npm": "6.x",
+    "node": "10.x"
   },
   "scripts": {
     "client-install": "cd client && npm install",
