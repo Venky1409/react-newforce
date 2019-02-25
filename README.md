@@ -1,10 +1,10 @@
 # React Express Starter Pack
 
-> Create full stack apps with React and Express. Run your client and server with a single command. 
+> Create full stack apps with React and Express. Run your client and server with a single command.
 
 ### Redux Version
 This version does not include Redux
-[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter) 
+[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter)
 
 ## Quick Start
 
@@ -24,15 +24,15 @@ npm run server
 # Run the React client only
 npm run client
 
-# Server runs on http://localhost:5000 and client on http://localhost:3000
+# Server runs on http://localhost:1409 and client on http://localhost:3000
 ```
 
 ## App Info
 
 ### Author
 
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
+Venkatesh Pinku
+[Front-end Developer](https://venkypinku2702.wixsite.com/venky1503pinku?fbclid=IwAR2DQyh3cD9ybQKri-0_uiJK3ymV9AHF1pLMiqGms_S3dyd2GZA5WlQWRks)
 
 ### Version
 

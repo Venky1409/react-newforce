@@ -12,6 +12,6 @@ app.get('/api/customers', (req, res) => {
   res.json(customers);
 });
 
-const port = 5000;
+const port = 1409;
 
 app.listen(port, () => `Server running on port ${port}`);
