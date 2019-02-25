@@ -1,0 +1,41 @@
+.navbar {
+  border-radius: 0px !important;
+}
+.navbar-brand {
+  font-weight: bold;
+}
+.control-label {
+  padding-top: 5px;
+}
+.form-horizontal {
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+.country-label {
+  text-align: right;
+}
+img {
+  width: 100%;
+  height: 450px !important;
+}
+.content-section {
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #f8f8f8;
+   color: #777;
+   text-align: center;
+   height: 35px;
+}
+.footer-text{
+  margin-top: 5px;
+}
+.form-horizontal {
+  margin-bottom: 50px;
+}
