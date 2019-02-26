@@ -4,6 +4,7 @@ export default class PayrollForm extends Component {
   constructor(props) {
     super(props);
       this.state = {
+        country: "",
         rate: '',
         days_salary: "",
         gross_margin: "",
@@ -28,9 +29,11 @@ export default class PayrollForm extends Component {
         sales: "",
         actual_margin: ""
       };
+      this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount() {
+    this.setState({ country: this.props.title });
     this.setState({ gross_onsite: this.props.formData.gross_onsite });
     this.setState({ emp_ded: this.props.formData.emp_ded });
     this.setState({ net_salary: this.props.formData.net_salary });
@@ -59,6 +62,7 @@ export default class PayrollForm extends Component {
     this.setState({ cost: '' });
     this.setState({ sales: '' });
     this.setState({ actual_margin: '' });
+    this.setState({ country: nextProps.title });
     this.setState({ gross_onsite: nextProps.formData.gross_onsite });
     this.setState({ emp_ded: nextProps.formData.emp_ded });
     this.setState({ net_salary: nextProps.formData.net_salary });
@@ -68,9 +72,15 @@ export default class PayrollForm extends Component {
     this.setState({ remmitance3: nextProps.formData.empr_ded2 });
 }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
-      console.log("Form data...",this.state.data);
+    let self = this;
+    fetch('/api/report', {
+      method: 'POST',
+      body: JSON.stringify(self.state),
+      }).then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error));
   };
 
   onChange(state, e) {
