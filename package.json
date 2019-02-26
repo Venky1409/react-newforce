@@ -13,8 +13,7 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "postinstall": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":"concurrently \"npm run server\" \"npm run client\""
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Venkatesh Pinku",
   "license": "MIT",
