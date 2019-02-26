@@ -77,9 +77,12 @@ export default class PayrollForm extends Component {
     let self = this;
     fetch('/api/report', {
       method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      mode: 'cors',
+      cache: 'default',
       body: JSON.stringify(self.state),
       }).then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
+      .then(response => window.open(response.path))
       .catch(error => console.error('Error:', error));
   };
 

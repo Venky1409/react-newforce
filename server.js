@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
+var fs = require('fs');
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
@@ -21,6 +22,19 @@ app.get('/api/customers', (req, res) => {
 
 app.post('/api/report', (req, res) => {
   console.log("request",req.body);
+  var writeStream = fs.createWriteStream("Report.txt");
+  var date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  writeStream.write("Contract Location:"+ req.body.country + "\n");
+  writeStream.write("Date:"+ date + "\n");
+  writeStream.write("Total Gross Salary for 21 working days:"+ req.body.days_salary + "\n");
+  writeStream.write("Monthly Employee Gross - Base Portion:"+ req.body.gross_salary + "\n");
+  writeStream.write("Total of Employee's Monthly Deductions - Base Portion:"+ req.body.emp_ded + "\n");
+  writeStream.write("Total of Employer Deductions – Base Portion:"+ req.body.empr_ded1 + "\n");
+  writeStream.write("Net Take Home Pay (I.e. On - Site Retained Income):"+ req.body.net_salary + "\n");
+  writeStream.write("Other allowances/Bonuses/Expenses:"+ req.body.expenses + "\n");
+  writeStream.write("Total Pay:"+ req.body.takehome + "\n");
+  writeStream.write("Thank You.");
+  writeStream.end();
   res.json(req.body);
 });
 
